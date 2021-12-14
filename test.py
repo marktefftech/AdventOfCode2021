@@ -6,3 +6,9 @@ print('len', len(test))
 print('left', test[:splitter])
 print('right', test[splitter+1:])
     
+yo = 'YO'
+no = 'NO'
+
+new = yo+no
+
+print(new)
