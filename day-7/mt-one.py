@@ -1,25 +1,13 @@
-from collections import defaultdict
-
 values = [int(i) for i in open('./input.txt','r').readline().strip().split(',')]
 
-spent = defaultdict(int)
+costs = []
 
-for value in values:
-    # already calculated the cost to get to that spot
-    if value in spent:
-        continue
+def get_cost(a, b):
+    n = abs(a - b)
+    return (n*(n+1))//2
 
-    totalFuelUsed = 0
-    runner = 0
-    
-    while runner < len(values)-1:
-        totalFuelUsed+= abs(value - values[runner])
-        runner+=1
-    spent[value] = totalFuelUsed
-    
-print('spent: %s, valuesLength: %s' % (len(spent), len(values)))
-leastFuelUsed = min(spent, key=spent.get)
-print('least fuel used is %s' % spent[leastFuelUsed] )
-print('checked %s spots' % len(spent))
+for pos in range(min(values), max(values)+1):
+    # costs.append(sum(abs(i - pos) for i in values))
+    costs.append(sum(get_cost(i,pos) for i in values))
 
-
+print(min(costs))
