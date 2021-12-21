@@ -56,3 +56,5 @@ g.add_edge(7, 8, 3)
 D = dijkstra(g, 0)
 
 print(D)
+
+for i, j in enumerate(g[])
