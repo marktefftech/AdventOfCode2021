@@ -1,9 +1,10 @@
 import ast #abstract syntax tree
+import itertools
 
 # [[[3,[8,6]],[6,1]],[[[1,1],2],[[1,0],0]]]
 # [[[1,[7,3]],1],9]
 lines = []
-for line in open('/Users/markteffeteller/dev/AdventOfCode2021/day-18/test.txt','r'):
+for line in open('/Users/mteffeteller/AoC2021/day-18/test.txt','r'):
     line = ast.literal_eval(line.strip())
     lines.append(line)
 
@@ -13,6 +14,12 @@ def checkDepth(l):
     else :
         return 0
 
+def explode(s):
+    print('explode')
+    print(s)
+    for value in s:
+            for subvalue in explode(value, tree_types):
+                yield subvalue
 
 for i, line in enumerate(lines):
     try:
@@ -21,8 +28,10 @@ for i, line in enumerate(lines):
         next = lines[i+1]
         combined.append(next)
         print('combined')
-        print(combined)
         print(checkDepth(combined))
+        if checkDepth(combined) >= 0: 
+            # found a 4-level nest, need to explode
+            explode(combined)
     except:
         print('last line')
 
